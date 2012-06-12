@@ -1,24 +1,44 @@
-== Welcome to Gamebox
-Description of your game here.
+== Gribbles!
 
-== Description of Contents
+Gribbles is a game about furry round creatures called gribbles.
+Gribbles have many amusing properties:
 
-src
-  Holds all the code that's specific to this particular application.
+- If you throw a gribble, it will bounce.
 
-config
-  Configuration files for the Gamebox environment and other dependencies.
+- If you feed a young gribble, it will grow somewhat, until it becomes
+  mature.
 
-doc
-  This directory is where your application documentation.
+- If you feed a mature gribble, it will spawn offspring similar to
+  itself, but possibly with some random mutations to its genetic
+  traits (such as color, size, and number of offspring).
 
-lib
-  Application specific libraries. Basically, any kind of custom code that doesn't
-  belong under controllers, models, or helpers. This directory is in the load path.
+- If you put two mature gribbles in the Test-Tube-O-Luv™ Splicing
+  Machine, it will create a single offspring that randomly combines
+  genetic traits from the parents.
 
-script
-  Helper scripts for automation and generation.
+- If you put a gribble in the NarSysUs™ Cloning Pod, it will create a
+  single offspring that is genetically identical to the parent.
 
-spec
-  Unit and functional tests along with fixtures. When using the script/generate scripts, template
-  test files will be generated for you and placed in this directory.
+- If you put a gribble in the eZFreez™ Cryostasis Chamber, it will be
+  frozen in time and protected from all harm.
+
+
+If for any reason you need/desire to cull the gribble population,
+there are several completely painless¹ population control solutions
+available:
+
+- If you poke a gribble with a pin, it will pop like a balloon.
+
+- If you set a gribble on fire, it will explode spectacularly. Nearby
+  gribbles caught in the blast may catch fire and explode too.
+
+- If you inject a gribble with Hungree-Hypo™ appetite stimulant, the
+  gribble will be filled with an insatiable hunger, and eat anything
+  nearby (including other gribbles) until it becomes twice its normal
+  mature size, at which point it will pop.
+
+
+-----
+
+¹ To ensure painlessness, wear protective gloves and eyewear at all
+times.
