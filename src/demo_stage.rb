@@ -1,7 +1,10 @@
 class DemoStage < Stage
   def setup
     super
-    @player = spawn :player, x: 10, y:30
+    @gribble = spawn( :gribble,
+                      x: 30, y: 30,
+                      color: Color::RED,
+                      radius: 20 )
   end
 end
 
