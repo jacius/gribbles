@@ -1,9 +1,11 @@
 class DemoStage < Stage
+  attr_accessor :physics_manager
+
   def setup
     super
     @physics_manager = this_object_context[:physics_manager]
     @physics_manager.configure
-    @physics_manager.elastic_iterations = 4
+    @physics_manager.space.gravity = vec2(0, 400)
     @physics_manager.damping = 0.4
 
     @gribble = spawn( :gribble,
@@ -26,6 +28,11 @@ class DemoStage < Stage
     @wall_right = spawn( :wall,
                           p1: [1024,   0],
                           p2: [1024, 799] )
-
   end
+
+  def update(time)
+    super
+    @physics_manager.update_physics(time)
+  end
+
 end
