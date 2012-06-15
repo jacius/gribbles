@@ -3,7 +3,7 @@ define_behavior :wally do
   setup do
     actor.has_attributes( p1: nil,
                           p2: nil,
-                          thickness:  0.5,
+                          thickness:  2,
                           elasticity: 0.5,
                           friction:   0.2)
 
@@ -25,7 +25,7 @@ end
 
 
 define_actor :wall do
-  has_behaviors :wally
+  has_behaviors :wally, :visible
 
   view do
     draw do |target, x_off, y_off, z|

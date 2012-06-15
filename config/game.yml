@@ -1,9 +1,9 @@
---- 
+---
 :title: Click to Make a Gribble!
 :sound: true
 :auto_quit: KbEscape
 :fullscreen: false
 :needs_cursor: true
-:screen_resolution: 
-- 1024
+:screen_resolution:
 - 800
+- 600

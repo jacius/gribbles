@@ -11,20 +11,24 @@ class DemoStage < Stage
     @gribbles = []
 
     @wall_top = spawn( :wall,
-                       p1: [0,    0],
-                       p2: [1024, 0] )
+                       p1: [0,   0],
+                       p2: [800, 0] )
+    @wall_top.react_to :hide
 
     @wall_bottom = spawn( :wall,
-                          p1: [0,    799],
-                          p2: [1024, 799] )
+                          p1: [0,   600],
+                          p2: [800, 600] )
+    @wall_bottom.react_to :hide
 
     @wall_left = spawn( :wall,
-                          p1: [1,   0],
-                          p2: [1, 799] )
+                        p1: [0,   0],
+                        p2: [0, 600] )
+    @wall_left.react_to :hide
 
     @wall_right = spawn( :wall,
-                          p1: [1024,   0],
-                          p2: [1024, 799] )
+                         p1: [800,   0],
+                         p2: [800, 600] )
+    @wall_right.react_to :hide
 
 
     @input_man = this_object_context[:input_manager]
