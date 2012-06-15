@@ -1,8 +1,9 @@
 --- 
-:title: My Gamebox Game!
+:title: Click to Make a Gribble!
 :sound: true
 :auto_quit: KbEscape
 :fullscreen: false
+:needs_cursor: true
 :screen_resolution: 
 - 1024
 - 800

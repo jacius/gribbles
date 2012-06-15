@@ -8,10 +8,7 @@ class DemoStage < Stage
     @physics_manager.space.gravity = vec2(0, 400)
     @physics_manager.damping = 0.4
 
-    @gribble = spawn( :gribble,
-                      x: 30, y: 30,
-                      color: Color::RED,
-                      radius: 20 )
+    @gribbles = []
 
     @wall_top = spawn( :wall,
                        p1: [0,    0],
@@ -28,6 +25,25 @@ class DemoStage < Stage
     @wall_right = spawn( :wall,
                           p1: [1024,   0],
                           p2: [1024, 799] )
+
+
+    @input_man = this_object_context[:input_manager]
+
+    @input_man.reg :mouse_down, MsLeft do
+      @gribbles << random_gribble( @input_man.window.mouse_x,
+                                   @input_man.window.mouse_y )
+    end
+
+  end
+
+
+  def random_gribble( x, y )
+    @gribbles << spawn( :gribble,
+                        x: x, y: y,
+                        color: Color.rgb(50 + rand(200),
+                                         50 + rand(200),
+                                         50 + rand(200)),
+                        radius: 10 + rand(20) )
   end
 
   def update(time)
