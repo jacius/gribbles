@@ -3,7 +3,9 @@ define_behavior :wally do
   setup do
     actor.has_attributes( p1: nil,
                           p2: nil,
-                          thickness: 0.5 )
+                          thickness:  0.5,
+                          elasticity: 0.5,
+                          friction:   0.2)
 
     v1 = Ftor.new(*actor.p1)
     v2 = Ftor.new(*actor.p2)
@@ -15,7 +17,9 @@ define_behavior :wally do
     add_behavior( :physical,
                   shape:  :poly,
                   verts:  verts,
-                  fixed:  true )
+                  fixed:  true,
+                  elasticity: actor.elasticity,
+                  friction:   actor.friction )
   end
 end
 
