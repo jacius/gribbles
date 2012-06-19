@@ -13,6 +13,8 @@ define_behavior :gribbly do
                   mass:   actor.density * actor.radius**2 * Math::PI,
                   elasticity: actor.elasticity,
                   friction:   actor.friction )
+
+    actor.shape.layers = 1
   end
 end
 

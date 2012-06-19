@@ -9,6 +9,7 @@ class MainStage < Stage
     @physics_manager.damping = 0.4
 
     @gribbles = []
+    @grabber = spawn :grabber, z: 100
 
     @wall_top = spawn( :wall,
                        p1: [0,   0],
@@ -33,21 +34,43 @@ class MainStage < Stage
 
     @input_man = this_object_context[:input_manager]
 
-    @input_man.reg :mouse_down, MsLeft do
-      @gribbles << random_gribble( @input_man.window.mouse_x,
-                                   @input_man.window.mouse_y )
+    @input_man.reg :mouse_down, MsLeft do |event|
+      left_click(event)
     end
 
+    @input_man.reg :mouse_up, MsLeft do |event|
+      left_unclick(event)
+    end
   end
 
+  def left_click(event)
+    x,y = event[:data].map(&:to_i)
+    clicked_on = find_gribble_at(x,y)
+    if clicked_on
+      @grabber.react_to :grab, clicked_on,
+    else
+      # Clicked on empty space, so create a new random gribble
+      @gribbles << make_random_gribble(x,y)
+    end
+  end
 
-  def random_gribble( x, y )
-    @gribbles << spawn( :gribble,
-                        x: x, y: y,
-                        color: Color.rgb(50 + rand(200),
-                                         50 + rand(200),
-                                         50 + rand(200)),
-                        radius: 10 + rand(20) )
+  def left_unclick(event)
+    @grabber.react_to :ungrab
+  end
+
+  def find_gribble_at(x, y)
+    v = vec2(x,y)
+    # TODO: do a space point query first, to narrow the possibilities?
+    @gribbles.find { |gribble| gribble.shape.point_query(v) }
+  end
+
+  def make_random_gribble(x, y)
+    spawn( :gribble,
+           x: x, y: y,
+           color: Color.rgb(50 + rand(200),
+                            50 + rand(200),
+                            50 + rand(200)),
+           radius: 10 + rand(20) )
   end
 
   def update(time)

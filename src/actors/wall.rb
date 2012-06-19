@@ -20,6 +20,8 @@ define_behavior :wally do
                   fixed:  true,
                   elasticity: actor.elasticity,
                   friction:   actor.friction )
+
+    actor.shape.layers = 1
   end
 end
 
