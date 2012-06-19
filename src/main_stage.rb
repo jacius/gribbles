@@ -1,4 +1,4 @@
-class DemoStage < Stage
+class MainStage < Stage
   attr_accessor :physics_manager
 
   def setup

@@ -18,7 +18,7 @@ Gamebox.configure do |config|
   config.gb_gfx_path = GAMEBOX_PATH + "data/graphics/"
   config.gb_fonts_path = GAMEBOX_PATH + "data/fonts"
   
-  # config.stages = [:demo]
+  config.stages = [:main]
   # config.game_name = "Untitled Game"
 end
 
