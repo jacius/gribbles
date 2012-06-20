@@ -11,24 +11,27 @@ class MainStage < Stage
     @gribbles = []
     @grabber = spawn :grabber, z: 100
 
-    @wall_top = spawn( :wall,
-                       p1: [0,   0],
-                       p2: [800, 0] )
+    width, height = 800, 600
+    thick = 20
+    topleft  = [0     - thick, 0      - thick]
+    topright = [width + thick, 0      - thick]
+    botleft  = [0     - thick, height + thick]
+    botright = [width + thick, height + thick]
+
+    @wall_top = spawn( :wall, p1: topleft, p2: topright,
+                       thickness: thick )
     @wall_top.react_to :hide
 
-    @wall_bottom = spawn( :wall,
-                          p1: [0,   600],
-                          p2: [800, 600] )
+    @wall_bottom = spawn( :wall, p1: botleft, p2: botright,
+                          thickness: thick )
     @wall_bottom.react_to :hide
 
-    @wall_left = spawn( :wall,
-                        p1: [0,   0],
-                        p2: [0, 600] )
+    @wall_left = spawn( :wall, p1: topleft, p2: botleft,
+                        thickness: thick )
     @wall_left.react_to :hide
 
-    @wall_right = spawn( :wall,
-                         p1: [800,   0],
-                         p2: [800, 600] )
+    @wall_right = spawn( :wall, p1: topright, p2: botright,
+                         thickness: thick )
     @wall_right.react_to :hide
 
 

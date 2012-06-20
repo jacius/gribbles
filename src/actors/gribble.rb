@@ -15,6 +15,7 @@ define_behavior :gribbly do
                   friction:   actor.friction )
 
     actor.shape.layers = 1
+    actor.body.v_limit = 2000
   end
 end
 
