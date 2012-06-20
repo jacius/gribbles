@@ -47,7 +47,7 @@ class MainStage < Stage
     x,y = event[:data].map(&:to_i)
     clicked_on = find_gribble_at(x,y)
     if clicked_on
-      @grabber.react_to :grab, clicked_on,
+      @grabber.react_to :grab, clicked_on
     else
       # Clicked on empty space, so create a new random gribble
       @gribbles << make_random_gribble(x,y)
