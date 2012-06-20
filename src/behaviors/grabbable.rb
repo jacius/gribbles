@@ -44,7 +44,8 @@ define_behavior :grabbable do
       body = actor.body
 
       # Cancel out gravity on this body, so it won't fall.
-      body.apply_force(-@physman.gravity * body.mass, CP::ZERO_VEC_2)
+      body.apply_force(-@physman.space.gravity * body.mass,
+                       CP::ZERO_VEC_2)
 
       # Stop current velocity and rotation.
       body.v = CP::ZERO_VEC_2
