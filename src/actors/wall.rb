@@ -7,17 +7,11 @@ define_behavior :wally do
                           elasticity: 0.5,
                           friction:   0.2)
 
-    v1 = Ftor.new(*actor.p1)
-    v2 = Ftor.new(*actor.p2)
-    perp = (v2 - v1).normal.unit * actor.thickness
-
-    verts = [(v1 + perp), (v2 + perp),
-             (v2 - perp), (v1 - perp)].map(&:to_a)
-
     add_behavior( :physical,
-                  shape:  :poly,
-                  verts:  verts,
-                  fixed:  true,
+                  shape:      :segment,
+                  endpoints:  [actor.p1, actor.p2],
+                  radius:     actor.thickness,
+                  fixed:      true,
                   elasticity: actor.elasticity,
                   friction:   actor.friction )
 
