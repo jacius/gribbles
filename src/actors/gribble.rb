@@ -20,7 +20,7 @@ end
 
 
 define_actor :gribble do
-  has_behaviors :gribbly
+  has_behaviors :gribbly, :grabbable
   view do
     draw do |target, x_off, y_off, z|
       x = actor.x + x_off
