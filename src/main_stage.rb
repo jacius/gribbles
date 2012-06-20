@@ -6,7 +6,7 @@ class MainStage < Stage
     @physics_manager = this_object_context[:physics_manager]
     @physics_manager.configure
     @physics_manager.space.gravity = vec2(0, 400)
-    @physics_manager.damping = 0.4
+    @physics_manager.space.damping = 0.4
 
     @gribbles = []
     @grabber = spawn :grabber, z: 100
@@ -18,33 +18,23 @@ class MainStage < Stage
     botleft  = [0     - thick, height + thick]
     botright = [width + thick, height + thick]
 
-    @wall_top = spawn( :wall, p1: topleft, p2: topright,
-                       thickness: thick )
-    @wall_top.react_to :hide
+    @walls = {
+      top:    spawn( :wall, p1: topleft, p2: topright,
+                     thickness: thick ),
+      bottom: spawn( :wall, p1: botleft, p2: botright,
+                     thickness: thick ),
+      left:   spawn( :wall, p1: topleft, p2: botleft,
+                     thickness: thick ),
+      right:  spawn( :wall, p1: topright, p2: botright,
+                     thickness: thick )
+    }
+    @walls.each_value { |wall| wall.react_to :hide }
 
-    @wall_bottom = spawn( :wall, p1: botleft, p2: botright,
-                          thickness: thick )
-    @wall_bottom.react_to :hide
-
-    @wall_left = spawn( :wall, p1: topleft, p2: botleft,
-                        thickness: thick )
-    @wall_left.react_to :hide
-
-    @wall_right = spawn( :wall, p1: topright, p2: botright,
-                         thickness: thick )
-    @wall_right.react_to :hide
-
-
-    @input_man = this_object_context[:input_manager]
-
-    @input_man.reg :mouse_down, MsLeft do |event|
-      left_click(event)
-    end
-
-    @input_man.reg :mouse_up, MsLeft do |event|
-      left_unclick(event)
-    end
+    i = this_object_context[:input_manager]
+    i.reg(:mouse_down, MsLeft) { |event| left_click(event)   }
+    i.reg(:mouse_up,   MsLeft) { |event| left_unclick(event) }
   end
+
 
   def left_click(event)
     x,y = event[:data].map(&:to_i)
@@ -60,6 +50,7 @@ class MainStage < Stage
   def left_unclick(event)
     @grabber.react_to :ungrab
   end
+
 
   def find_gribble_at(x, y)
     v = vec2(x,y)
