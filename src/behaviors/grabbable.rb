@@ -17,6 +17,7 @@ define_behavior :grabbable do
 
     @old_angle = actor.body.a
     @old_moment = actor.body.moment
+    @offset = CP::ZERO_VEC_2
 
     @physman = physics_manager
 
@@ -32,14 +33,15 @@ define_behavior :grabbable do
       if actor.grabbed_by
         time_s = time_ms/1000.0
         # Move towards the grabber.
-        actor.body.slew(vec2(actor.grabbed_by.x,
-                             actor.grabbed_by.y),
+        actor.body.slew(@offset + vec2(actor.grabbed_by.x,
+                                       actor.grabbed_by.y),
                         time_s)
       end
     end
 
     def grabbed(grabbed_by)
       actor.grabbed_by = grabbed_by
+      @offset = actor.body.p - vec2(grabbed_by.x, grabbed_by.y)
 
       body = actor.body
 
