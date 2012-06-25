@@ -1,7 +1,8 @@
 APP_ROOT = "#{File.join(File.dirname(__FILE__),"..")}/"
 
-require 'chipmunk'
-require 'gamebox'
+require "yaml"
+require "chipmunk"
+require "gamebox"
 
 Gamebox.configure do |config|
   config.config_path = APP_ROOT + "config/"
