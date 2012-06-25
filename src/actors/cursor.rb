@@ -1,14 +1,8 @@
 
 define_behavior :grabby do
-  requires :input_manager
   setup do
     actor.has_attributes( target: nil )
-    reacts_with :grab, :ungrab, :move_to
-
-    input_manager.reg :mouse_motion do |event|
-      x,y = event[:data]
-      actor.react_to :move_to, x, y
-    end
+    reacts_with :grab, :ungrab
   end
 
   helpers do
@@ -22,16 +16,12 @@ define_behavior :grabby do
       actor.target.react_to :ungrabbed if actor.target
       actor.target = nil
     end
-
-    def move_to(x,y)
-      actor.x, actor.y = x,y
-    end
   end
   
 end
 
 define_actor :cursor do
-  has_behaviors :visible, :positioned, :grabby
+  has_behaviors :visible, :positioned, :follows_mouse, :grabby
 
   view do
     draw do |target, x_off, y_off, z|
