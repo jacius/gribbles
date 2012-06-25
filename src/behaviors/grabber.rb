@@ -9,7 +9,7 @@ define_behavior :grabber do
     def grab(grab_target)
       return actor.ungrab() if grab_target.nil?
       actor.grab_target = grab_target
-      actor.grab_target.react_to :grabbed, actor
+      actor.grab_target.react_to :grabbed_by, actor
     end
 
     def ungrab

@@ -13,7 +13,7 @@ define_behavior :grabbable do
   requires :physics_manager, :director
 
   setup do
-    actor.has_attributes( grabbed_by: nil )
+    actor.has_attributes( grabber: nil )
 
     @old_angle = actor.body.a
     @old_moment = actor.body.moment
@@ -25,23 +25,23 @@ define_behavior :grabbable do
       update(time_ms)
     end
 
-    reacts_with :grabbed, :ungrabbed
+    reacts_with :grabbed_by, :ungrabbed
   end
 
   helpers do
     def update(time_ms)
-      if actor.grabbed_by
+      if actor.grabber
         time_s = time_ms/1000.0
         # Move towards the grabber.
-        actor.body.slew(@offset + vec2(actor.grabbed_by.x,
-                                       actor.grabbed_by.y),
+        actor.body.slew(@offset + vec2(actor.grabber.x,
+                                       actor.grabber.y),
                         time_s)
       end
     end
 
-    def grabbed(grabbed_by)
-      actor.grabbed_by = grabbed_by
-      @offset = actor.body.p - vec2(grabbed_by.x, grabbed_by.y)
+    def grabbed_by(grabber)
+      actor.grabber = grabber
+      @offset = actor.body.p - vec2(grabber.x, grabber.y)
 
       body = actor.body
 
@@ -59,7 +59,7 @@ define_behavior :grabbable do
     end
 
     def ungrabbed
-      actor.grabbed_by = nil
+      actor.grabber = nil
       # Stop cancelling gravity.
       actor.body.reset_forces
       # Reset moment of inertia.
