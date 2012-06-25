@@ -15,11 +15,8 @@ define_behavior :grabbable do
   setup do
     actor.has_attributes( grabber: nil )
 
-    @old_angle = actor.body.a
     @old_moment = actor.body.moment
     @offset = CP::ZERO_VEC_2
-
-    @physman = physics_manager
 
     director.when :update do |time_ms|
       update(time_ms)
@@ -46,7 +43,7 @@ define_behavior :grabbable do
       body = actor.body
 
       # Cancel out gravity on this body, so it won't fall.
-      body.apply_force(-@physman.space.gravity * body.mass,
+      body.apply_force(-physics_manager.space.gravity * body.mass,
                        CP::ZERO_VEC_2)
 
       # Stop current velocity and rotation.
