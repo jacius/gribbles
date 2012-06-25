@@ -1,6 +1,6 @@
 source "http://rubygems.org"
-gem 'chipmunk'
-gem 'require_all'
-gem "gamebox", '0.4.0.rc4'
+gem "chipmunk"
+gem "require_all"
+gem "gamebox", "0.4.0.rc5"
 gem "conject"
 gem "rspec"
