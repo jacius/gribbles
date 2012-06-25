@@ -1,38 +1,17 @@
 
-define_behavior :grabby do
-  setup do
-    actor.has_attributes( target: nil )
-    reacts_with :grab, :ungrab
-  end
-
-  helpers do
-    def grab(target)
-      return actor.ungrab() if target.nil?
-      actor.target = target
-      actor.target.react_to :grabbed, actor
-    end
-
-    def ungrab
-      actor.target.react_to :ungrabbed if actor.target
-      actor.target = nil
-    end
-  end
-  
-end
-
 define_actor :cursor do
-  has_behaviors :visible, :positioned, :follows_mouse, :grabby
+  has_behaviors :visible, :positioned, :follows_mouse, :grabber
 
   view do
     draw do |target, x_off, y_off, z|
       x = actor.x + x_off
       y = actor.y + y_off
       size = 4
-      color = actor.target ? Color::GREEN : Color::RED
+      color = actor.grab_target ? Color::GREEN : Color::RED
 
-      if actor.target
-        x2 = actor.target.x + x_off
-        y2 = actor.target.y + y_off
+      if actor.grab_target
+        x2 = actor.grab_target.x + x_off
+        y2 = actor.grab_target.y + y_off
         target.draw_line( x, y, x2, y2, Color::YELLOW, actor.z )
       end
 
