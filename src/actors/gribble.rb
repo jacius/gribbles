@@ -1,19 +1,7 @@
 
 define_behavior :gribbly do
   setup do
-    actor.has_attributes( color:         Color::WHITE,
-                          radius:        10,
-                          density:       20,
-                          elasticity:    0.5,
-                          friction:      0.8 )
-
-    add_behavior( :physical,
-                  shape:  :circle,
-                  radius: actor.radius,
-                  mass:   actor.density * actor.radius**2 * Math::PI,
-                  elasticity: actor.elasticity,
-                  friction:   actor.friction )
-
+    actor.has_attributes( color: Color::WHITE ) 
     actor.shape.layers = 1
     actor.body.v_limit = 2000
   end
@@ -21,7 +9,7 @@ end
 
 
 define_actor :gribble do
-  has_behaviors :gribbly, :grabbable, :jittery
+  has_behaviors :bally, :grabbable, :jittery, :gribbly
   view do
     draw do |target, x_off, y_off, z|
       x = actor.x + x_off
