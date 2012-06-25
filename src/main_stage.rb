@@ -9,7 +9,7 @@ class MainStage < Stage
     @physics_manager.space.damping = 0.4
 
     @gribbles = []
-    @grabber = spawn :grabber, z: 100
+    @cursor = spawn :cursor, z: 100
 
     width, height = 800, 600
     thick = 20
@@ -40,7 +40,7 @@ class MainStage < Stage
     x,y = event[:data].map(&:to_i)
     clicked_on = find_gribble_at(x,y)
     if clicked_on
-      @grabber.react_to :grab, clicked_on
+      @cursor.react_to :grab, clicked_on
     else
       # Clicked on empty space, so create a new random gribble
       @gribbles << make_random_gribble(x,y)
@@ -48,7 +48,7 @@ class MainStage < Stage
   end
 
   def left_unclick(event)
-    @grabber.react_to :ungrab
+    @cursor.react_to :ungrab
   end
 
 

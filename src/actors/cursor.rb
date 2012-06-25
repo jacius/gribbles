@@ -30,7 +30,7 @@ define_behavior :grabby do
   
 end
 
-define_actor :grabber do
+define_actor :cursor do
   has_behaviors :visible, :positioned, :grabby
 
   view do
