@@ -1,5 +1,5 @@
 
-define_behavior :grabber do
+define_behavior :grabber_mode do
   setup do
     actor.has_attributes( grab_target: nil )
     reacts_with :grab, :ungrab

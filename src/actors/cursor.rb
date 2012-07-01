@@ -2,9 +2,9 @@
 define_actor :cursor do
   has_behaviors :visible, :positioned, :follows_mouse
   has_behavior modal: {
-    default: :grabber,
+    default: :grabber_mode,
     modes: {
-      grabber: {},
+      grabber_mode: {},
     }}
 
   view do
