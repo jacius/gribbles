@@ -1,6 +1,11 @@
 
 define_actor :cursor do
-  has_behaviors :visible, :positioned, :follows_mouse, :grabber
+  has_behaviors :visible, :positioned, :follows_mouse
+  has_behavior modal: {
+    default: :grabber,
+    modes: {
+      grabber: {},
+    }}
 
   view do
     draw do |target, x_off, y_off, z|
